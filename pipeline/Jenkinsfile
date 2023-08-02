@@ -33,6 +33,7 @@ pipeline {
     agent any
     environment { 
         IMAGE_NAME_DOC = "mukeshphulwani66/pipelinedemo:${BUILD_NUMBER}"
+        scannerHome =  tool 'SonarScanner';
     }
     stages {
         stage('preparation') {
@@ -40,6 +41,14 @@ pipeline {
                 echo 'cloning repo'
                 git url: 'https://github.com/mukeshphulwani66/simple-node-proj.git', branch: 'main'
             }
+        }
+        stage('SonarQube Analysis') {
+            steps{
+               withSonarQubeEnv() {
+                    sh "${scannerHome}/bin/sonar-scanner"
+              } 
+            }
+            
         }
         
         stage('test') {
