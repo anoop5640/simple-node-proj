@@ -32,7 +32,7 @@
 pipeline {
     agent any
     environment { 
-        IMAGE_NAME_DOC = 'mukeshphulwani66/pipelinedemo:${BUILD_NUMBER}'
+        IMAGE_NAME_DOC = "mukeshphulwani66/pipelinedemo:${BUILD_NUMBER}"
     }
     stages {
         stage('preparation') {
