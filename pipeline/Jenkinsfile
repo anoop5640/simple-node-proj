@@ -30,9 +30,7 @@
 // Declarative 
 
 pipeline {
-    agent {
-        label 'agent-chintu'
-    }
+    agent any
     environment { 
         IMAGE_NAME_DOC = "mukeshphulwani66/pipelinedemo:${BUILD_NUMBER}"
         scannerHome =  tool 'SonarScanner';
