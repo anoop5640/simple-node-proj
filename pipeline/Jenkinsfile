@@ -3,23 +3,23 @@
 // node {
 //   stage('preperation'){
 //     echo 'cloning repo'
-//     git url:'https://github.com/mukeshphulwani66/simple-node-proj.git',branch:'main'
+//     git url:'https://github.com/anoop5640/simple-node-proj.git',branch:'main'
 //   }
 //   stage('test'){
 //     echo 'running test cases'
-//      nodejs(nodeJSInstallationName: 'node 16') {
+//      nodejs(nodeJSInstallationName: 'node 23') {
 //       sh 'npm i -D'
 //       sh 'npm run test'
 //     }
 //   }
 //   stage('build'){
 //     echo 'building image'
-//     sh 'docker build -t mukeshphulwani66/pipelinedemo:${BUILD_NUMBER} .'
+//     sh 'docker build -t anoop5640/pipelinedemo:${BUILD_NUMBER} .'
 //   }
 //   stage('deploy to docker hub'){
 //     withCredentials([usernamePassword(credentialsId: 'dockerhubcred', usernameVariable: 'USERNAME_DOC', passwordVariable: 'PASSWORD_DOC')]) {
 //        sh 'docker login -u ${USERNAME_DOC} -p ${PASSWORD_DOC}'
-//        sh 'docker image push mukeshphulwani66/pipelinedemo:${BUILD_NUMBER}'
+//        sh 'docker image push anoop5640/pipelinedemo:${BUILD_NUMBER}'
 //    }
 //   }
 //    stage('cleanup'){
@@ -32,29 +32,22 @@
 pipeline {
     agent any
     environment { 
-        IMAGE_NAME_DOC = "mukeshphulwani66/pipelinedemo:${BUILD_NUMBER}"
+        IMAGE_NAME_DOC = "anoop5640/pipelinedemo:${BUILD_NUMBER}"
         scannerHome =  tool 'SonarScanner';
     }
     stages {
         stage('preparation') {
             steps {
                 echo 'cloning repo'
-                git url: 'https://github.com/mukeshphulwani66/simple-node-proj.git', branch: 'main'
+                git url: 'https://github.com/anoop5640/simple-node-proj.git', branch: 'main'
             }
         }
-        stage('SonarQube Analysis') {
-            steps{
-               withSonarQubeEnv('SonarScanner') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-              } 
-            }
-            
-        }
+        
         
         stage('test') {
             steps {
                 echo 'running test cases'
-                nodejs(nodeJSInstallationName: 'node 16') {
+                nodejs(nodeJSInstallationName: 'node 23') {
                     sh 'npm i -D'
                     sh 'npm run test'
                 }
