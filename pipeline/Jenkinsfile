@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment { 
         IMAGE_NAME_DOC = "anoop5640/pipelinedemo:${BUILD_NUMBER}"
-        scannerHome =  tool 'SonarScanner';
+
     }
     stages {
         stage('preparation') {
