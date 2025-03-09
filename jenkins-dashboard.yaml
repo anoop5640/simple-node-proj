@@ -38,6 +38,8 @@ services:
       - postgresql_data:/var/lib/postgresql/data
     networks:
       - ${NETWORK_TYPE:-ipv4}
+    ports:
+      - "5432:5432"
 
 volumes:
   sonarqube_data:
